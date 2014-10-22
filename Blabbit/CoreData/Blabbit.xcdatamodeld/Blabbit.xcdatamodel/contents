@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="BBTGroupConversation" representedClassName="BBTGroupConversation" syncable="YES">
+        <attribute name="creationDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="isOwner" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="lastModified" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="liked" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="likesCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="locationAddress" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="membership" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="photoThumbnail" optional="YES" attributeType="Transformable" valueTransformerName="RFImageToDataTransformer" syncable="YES"/>
+        <attribute name="photoThumbnailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photoURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="roomName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="subject" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BBTMessage" inverseName="groupConversation" inverseEntity="BBTMessage" syncable="YES"/>
+    </entity>
+    <entity name="BBTMessage" representedClassName="BBTMessage" syncable="YES">
+        <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hasMedia" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageThumbnail" optional="YES" attributeType="Transformable" valueTransformerName="RFImageToDataTransformer" syncable="YES"/>
+        <attribute name="imageThumbnailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isIncoming" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isRead" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isSystemEvent" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="localTimestamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="remoteTimestamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="systemEventType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="user" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="contact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BBTUser" inverseName="messages" inverseEntity="BBTUser" syncable="YES"/>
+        <relationship name="contactUsingAsLastMessage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BBTUser" inverseName="lastMessage" inverseEntity="BBTUser" syncable="YES"/>
+        <relationship name="groupConversation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BBTGroupConversation" inverseName="messages" inverseEntity="BBTGroupConversation" syncable="YES"/>
+    </entity>
+    <entity name="BBTUser" representedClassName="BBTUser" syncable="YES">
+        <attribute name="avatarThumbnail" optional="YES" attributeType="Transformable" valueTransformerName="RFImageToDataTransformer" syncable="YES"/>
+        <attribute name="avatarThumbnailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="displayName" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="friendship" optional="YES" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="lastModified" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="unreadMessageCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="username" attributeType="String" indexed="YES" syncable="YES"/>
+        <relationship name="lastMessage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BBTMessage" inverseName="contactUsingAsLastMessage" inverseEntity="BBTMessage" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BBTMessage" inverseName="contact" inverseEntity="BBTMessage" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="BBTGroupConversation" positionX="160" positionY="108" width="128" height="270"/>
+        <element name="BBTMessage" positionX="-45" positionY="32" width="128" height="298"/>
+        <element name="BBTUser" positionX="160" positionY="-91" width="128" height="178"/>
+    </elements>
+</model>
